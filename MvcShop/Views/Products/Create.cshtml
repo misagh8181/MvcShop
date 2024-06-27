@@ -1,0 +1,72 @@
+﻿@model MvcShop.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            @{
+                int category_id = (int)ViewData["CategoryId"];
+                <input type="hidden" asp-for="CategoryId" value="@category_id">
+                foreach (var item in ViewBag.MyList)
+                {
+                    <div class="form-group">
+                        <label class="control-label">@item.Name</label>
+                        <input class="text-danger form-control" type="text" name="fieldValues"/>
+                        
+                    </div>
+                    <input type="hidden" name="fieldValues" value="@item.Id">
+                }
+            }
+            <div class="form-group">
+                <label asp-for="Product_Name" class="control-label"></label>
+                <input asp-for="Product_Name" class="form-control"/>
+                <span asp-validation-for="Product_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control"/>
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control"/>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control"/>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Products List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+}
+

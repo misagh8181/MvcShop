@@ -1,0 +1,140 @@
+﻿@model IEnumerable<MvcShop.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+<style>
+    .button {
+        position:absolute;
+        bottom:80px;
+        color: black;
+        background-color: tomato;
+        width: 300px;
+        height: 55px;
+        font-size: 25px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 48px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 2px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+        transition: 1s;
+        text-decoration:none;
+        display: block;
+    }
+
+    .button1 {
+        position:absolute;
+        bottom:80px;
+        left: 490px;
+        color: black;
+        background-color: #4784ff;
+        width: 300px;
+        height: 55px;
+        font-size: 25px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 48px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 2px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+        transition: 1s;
+        text-decoration:none;
+        display: block;
+    }
+
+    .button:hover {
+        position: absolute;
+        bottom: 80px;
+        color: black;
+        background-color: rgb(207, 57, 30);
+        width: 320px;
+        height: 65px;
+        font-size: 30px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 58px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 3px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        text-decoration: none;
+        display:block;
+    }
+
+    .button1:hover {
+        position: absolute;
+        bottom: 80px;
+        left: 490px;
+        color: black;
+        background-color: rgb(16, 70, 184);
+        width: 320px;
+        height: 65px;
+        font-size: 30px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 58px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 3px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        text-decoration: none;
+        display:block;
+    }
+</style>
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category_Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category_Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-action="Create" asp-route-id="@item.Id">Creat a subcategory</a> |
+                <a asp-controller="Products" asp-action="Create" asp-route-id="@item.Id">Creat a subproduct</a> |
+                <a asp-controller="Fields" asp-action="Create" asp-route-id="@item.Id">Creat Field</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<br>
+<br>
+<div>
+    <a class="button" asp-controller="Products" asp-action="Index">Products Menu</a>
+</div>
+<div>
+    <a class="button1" asp-controller="Fields" asp-action="Index">Fields Menu</a>
+</div>

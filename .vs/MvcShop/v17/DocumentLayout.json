@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\EMERTAT\\source\\repos\\MvcShop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E425F820-B221-4268-9563-AAAAFD17943A}|MvcShop\\MvcShop.csproj|c:\\users\\emertat\\source\\repos\\mvcshop\\mvcshop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E425F820-B221-4268-9563-AAAAFD17943A}|MvcShop\\MvcShop.csproj|solutionrelative:mvcshop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\EMERTAT\\source\\repos\\MvcShop\\MvcShop\\Program.cs",
+              "RelativeDocumentMoniker": "MvcShop\\Program.cs",
+              "ToolTip": "C:\\Users\\EMERTAT\\source\\repos\\MvcShop\\MvcShop\\Program.cs",
+              "RelativeToolTip": "MvcShop\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T16:12:02.199Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

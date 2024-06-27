@@ -1,0 +1,107 @@
+﻿@model IEnumerable<MvcShop.Models.Field>
+
+@{
+    ViewData["Title"] = "Fields";
+}
+
+<style>
+    .button {
+        position:absolute;
+        bottom:80px;
+        color: black;
+        background-color: #228314;
+        width: 140px;
+        height: 55px;
+        font-size: 25px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 48px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 2px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+        transition: 1s;
+        text-decoration:none;
+        display: block;
+    }
+
+    .button:hover {
+        position: absolute;
+        bottom: 80px;
+        color: black;
+        background-color: #175e1f;
+        width: 180px;
+        height: 65px;
+        font-size: 30px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 58px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 3px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        text-decoration: none;
+        display:block;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+@* <p> *@
+@*     <a asp-action="Create">Create New</a> *@
+@* </p> *@
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Category Name
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            @{
+                foreach (var element in ViewBag.MyList)
+                {
+                    if (element.FieldId==item.Id)
+                    {
+                        foreach (var innerElement in ViewBag.Categories)
+                        {
+                            if (innerElement.Id==element.CategoryId)
+                            {
+                                <td>
+                                    @innerElement.Category_Name
+                                </td> 
+                            }
+                        }
+                    }
+                }
+            }
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div>
+    <a class="button" asp-controller="Categories" asp-action="Index">Back</a>
+</div>

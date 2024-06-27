@@ -1,0 +1,765 @@
+﻿@model IEnumerable<MvcShop.Models.Product>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Featured products */
+    .products {
+        text-align: center;
+        padding: 40px 0;
+    }
+    
+    .pad{
+    padding-left:10px ;    
+    }
+
+    .product {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin: 20px;
+        display: inline-block;
+        width: 30%;
+        transition:1s;
+    }
+
+        .product img {
+            max-width: 100%;
+            height: 170px;
+        }
+
+        .product h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 18px;
+            color: #777;
+        }
+
+    .vitrine {
+        background-image: linear-gradient(orangered,orange);
+        border:solid black 2px;
+        border-radius:30%;
+        color: rgb(51, 48, 48);
+        height: 150px;
+        font-size: 80px;
+        font-family: cursive;
+        font-weight: bolder;
+        text-align: center;
+        line-height:135px;
+        transition: 1s;
+        width:90%;
+        margin-left:5%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .column1 {
+        width: 80%;
+        float: left;
+    }
+
+    .column2 {
+        width: 20%;
+        height: 900px;
+        float: left;
+    }
+
+   
+    .filter_title{
+        color:royalblue;
+        width: 100%;
+        height: 100px;
+        font-size: 60px;
+        font-family: cursive;
+        font-weight: bolder;
+        padding-left:50px;
+        line-height: 100px;
+        float: left;
+        transition: 1s;
+    }
+
+    .filter{
+        text-align:left;
+        font-size: 20px;
+        font-family: cursive;
+        font-weight:bolder;
+        padding-left:15px;
+        margin-left:15px
+    }
+
+
+    .text{
+        width:100%;
+        height:80px;
+        line-height:150px;
+    }
+
+    .text_1{
+        margin-top: 60px;
+    }
+
+    .element_1{
+        margin-top: 40px;
+    }
+
+    .element{
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+        transition: 1s;
+    }
+
+    .button{
+        color: black;
+        background-color: palegreen;
+        width: 130px;
+        height: 55px;
+        font-size: 25px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align:center;
+        margin-top:50px;
+        line-height: 0px;
+        float: left;
+        border-radius:20%;
+        border:solid black 2px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+        transition:1s;
+    }
+
+    .link{
+        text-decoration:none;
+    }
+    
+    .lablelForSelect{
+        margin-top: 40px;
+    }
+    
+    .selectBox{
+        margin-top: 20px;
+        width: 300px;
+    }
+    
+    .filter_title:hover{
+        color: darkblue;
+        width: 100%;
+        height: 100px;
+        font-size: 70px;
+        font-family: cursive;
+        font-weight: bolder;
+        padding-left: 50px;
+        line-height: 100px;
+        float: left;
+    }
+
+    .vitrine:hover {
+        background-image: linear-gradient(orangered,orange);
+        border: solid black 2px;
+        border-radius: 30%;
+        color: black;
+        height: 150px;
+        font-size: 90px;
+        font-family: cursive;
+        font-weight: bolder;
+        text-align: center;
+        line-height: 135px;
+        width: 90%;
+        margin-left: 5%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .product:hover{
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin: 20px;
+        display: inline-block;
+        width: 35%;
+        cursor: pointer;
+    }
+
+    .element:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .button:hover {
+        color: black;
+        background-color: green;
+        width: 140px;
+        height: 65px;
+        font-size: 30px;
+        font-family: cursive;
+        font-weight: bolder;
+        margin-left: 80px;
+        text-align: center;
+        margin-top: 50px;
+        line-height: 0px;
+        float: left;
+        border-radius: 20%;
+        border: solid black 3px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="text-center">
+    <div class="column1">
+
+        <div class="vitrine">
+            Vitrine
+        </div>
+
+        <div class="products">
+            @{
+                if ((String)ViewData["Name"] == "" && (int)ViewData["Price"] == -1)
+                {
+                    foreach (var item in Model)
+                    {
+                        if ((int)ViewData["CurrentCategory"] == 0)
+                        {
+                            <a class="link" href="/Products/Details/@item.Id">
+                                <div class="product">
+                                    <img src="@Url.Content(item.Image)" alt="Product">
+                                    <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                    <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            foreach (var element in ViewBag.ProductsToShow)
+                            {
+                                if (element.Id == item.Id)
+                                {
+                                    if (ViewBag.filterForFields.Count == 0)
+                                    {
+                                        <a class="link" href="/Products/Details/@item.Id">
+                                            <div class="product">
+                                                <img src="@Url.Content(item.Image)" alt="Product">
+                                                <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                            </div>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        bool check = true;
+                                        foreach (var pfv in ViewBag.ProductFieldValues)
+                                        {
+                                            for (int i = 0; i < ViewBag.filterForFields.Count; i += 2)
+                                            {
+                                                if (pfv.FieldId == int.Parse(ViewBag.filterForFields[i + 1]))
+                                                {
+                                                    if (pfv.ProductId == item.Id)
+                                                    {
+                                                        if (pfv.Value != ViewBag.filterForFields[i])
+                                                        {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (check)
+                                        {
+                                            <a class="link" href="/Products/Details/@item.Id">
+                                                <div class="product">
+                                                    <img src="@Url.Content(item.Image)" alt="Product">
+                                                    <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                    <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                </div>
+                                            </a>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        if ((String)ViewData["Name"] == "")
+                        {
+                            if (item.Price < (int)ViewData["Price"])
+                            {
+                                if ((int)ViewData["CurrentCategory"] == 0)
+                                {
+                                    <a class="link" href="/Products/Details/@item.Id">
+                                        <div class="product">
+                                            <img src="@Url.Content(item.Image)" alt="Product">
+                                            <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                            <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    foreach (var element in ViewBag.ProductsToShow)
+                                    {
+                                        if (element.Id == item.Id)
+                                        {
+                                            if (ViewBag.filterForFields.Count == 0)
+                                            {
+                                                <a class="link" href="/Products/Details/@item.Id">
+                                                    <div class="product">
+                                                        <img src="@Url.Content(item.Image)" alt="Product">
+                                                        <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                        <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                    </div>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                bool check = true;
+                                                foreach (var pfv in ViewBag.ProductFieldValues)
+                                                {
+                                                    for (int i = 0; i < ViewBag.filterForFields.Count; i += 2)
+                                                    {
+                                                        if (pfv.FieldId == int.Parse(ViewBag.filterForFields[i + 1]))
+                                                        {
+                                                            if (pfv.ProductId == item.Id)
+                                                            {
+                                                                if (pfv.Value != ViewBag.filterForFields[i])
+                                                                {
+                                                                    check = false;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                if (check)
+                                                {
+                                                    <a class="link" href="/Products/Details/@item.Id">
+                                                        <div class="product">
+                                                            <img src="@Url.Content(item.Image)" alt="Product">
+                                                            <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                            <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if ((int)ViewData["Price"] == -1)
+                        {
+                            if (item.Product_Name.Contains((String)ViewData["Name"]))
+                            {
+                                if ((int)ViewData["CurrentCategory"] == 0)
+                                {
+                                    <a class="link" href="/Products/Details/@item.Id">
+                                        <div class="product">
+                                            <img src="@Url.Content(item.Image)" alt="Product">
+                                            <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                            <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    foreach (var element in ViewBag.ProductsToShow)
+                                    {
+                                        if (element.Id == item.Id)
+                                        {
+                                            if (ViewBag.filterForFields.Count == 0)
+                                            {
+                                                <a class="link" href="/Products/Details/@item.Id">
+                                                    <div class="product">
+                                                        <img src="@Url.Content(item.Image)" alt="Product">
+                                                        <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                        <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                    </div>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                bool check = true;
+                                                foreach (var pfv in ViewBag.ProductFieldValues)
+                                                {
+                                                    for (int i = 0; i < ViewBag.filterForFields.Count; i += 2)
+                                                    {
+                                                        if (pfv.FieldId == int.Parse(ViewBag.filterForFields[i + 1]))
+                                                        {
+                                                            if (pfv.ProductId == item.Id)
+                                                            {
+                                                                if (pfv.Value != ViewBag.filterForFields[i])
+                                                                {
+                                                                    check = false;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                if (check)
+                                                {
+                                                    <a class="link" href="/Products/Details/@item.Id">
+                                                        <div class="product">
+                                                            <img src="@Url.Content(item.Image)" alt="Product">
+                                                            <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                            <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (item.Product_Name.Contains((String)ViewData["Name"]) && item.Price < (int)ViewData["Price"])
+                            {
+                                if ((int)ViewData["CurrentCategory"] == 0)
+                                {
+                                    <a class="link" href="/Products/Details/@item.Id">
+                                        <div class="product">
+                                            <img src="@Url.Content(item.Image)" alt="Product">
+                                            <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                            <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    foreach (var element in ViewBag.ProductsToShow)
+                                    {
+                                        if (element.Id == item.Id)
+                                        {
+                                            if (ViewBag.filterForFields.Count == 0)
+                                            {
+                                                <a class="link" href="/Products/Details/@item.Id">
+                                                    <div class="product">
+                                                        <img src="@Url.Content(item.Image)" alt="Product">
+                                                        <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                        <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                    </div>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                bool check = true;
+                                                foreach (var pfv in ViewBag.ProductFieldValues)
+                                                {
+                                                    for (int i = 0; i < ViewBag.filterForFields.Count; i += 2)
+                                                    {
+                                                        if (pfv.FieldId == int.Parse(ViewBag.filterForFields[i + 1]))
+                                                        {
+                                                            if (pfv.ProductId == item.Id)
+                                                            {
+                                                                if (pfv.Value != ViewBag.filterForFields[i])
+                                                                {
+                                                                    check = false;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                if (check)
+                                                {
+                                                    <a class="link" href="/Products/Details/@item.Id">
+                                                        <div class="product">
+                                                            <img src="@Url.Content(item.Image)" alt="Product">
+                                                            <h3>@Html.DisplayFor(modelItem => item.Product_Name)</h3>
+                                                            <p>$@Html.DisplayFor(modelItem => item.Price)</p>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+
+    <div class="column2">
+        <div class="filter_title">
+            Filters
+        </div>
+        <div class="filter">
+            <form action="" method="get" id="myForm">
+                <div class="text text_1">Name:</div>
+                <br>
+                @if ((string)ViewData["Name"] != "")
+                {
+                    <input class="element element_1 pad" type="text" name="Name" value="@ViewData["Name"]">
+                }
+                else
+                {
+                    <input class="element element_1" type="text" name="Name" placeholder=" Product Name">
+                }
+                <br>
+                <div class="text">Price:</div>
+                <br>
+                @if ((int)ViewData["Price"] != -1)
+                {
+                    <input class="element pad" type="text" name="Price" value="@ViewData["Price"]">
+                }
+                else
+                {
+                    <input class="element" type="text" name="Price" placeholder=" Lower than">
+                }
+                <label class="lablelForSelect" for="Categories">Select a Category:</label>
+                <select class="selectBox" id="Categories" name="CategoryChoosed">
+                    @if ((int)ViewData["CurrentCategory"] != 0)
+                    {
+                        <option value="0">None</option>
+                        @foreach (var item in ViewBag.HeadCategories)
+                        {
+                            if (item.Id == (int)ViewData["CurrentCategory"])
+                            {
+                                <option value="@item.Id" selected="">@item.Category_Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Category_Name</option>
+                            }
+
+                            @foreach (var element in ViewBag.Categories)
+                            {
+                                if (element.ParentId == item.Id)
+                                {
+                                    if (element.Id == (int)ViewData["CurrentCategory"])
+                                    {
+                                        <option value="@element.Id" selected>&nbsp; &nbsp;@element.Category_Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@element.Id">&nbsp; &nbsp;@element.Category_Name</option>
+                                    }
+
+                                    @foreach (var innerElement in ViewBag.Categories)
+                                    {
+                                        if (innerElement.ParentId == element.Id)
+                                        {
+                                            if (innerElement.Id == (int)ViewData["CurrentCategory"])
+                                            {
+                                                <option value="@innerElement.Id" selected>
+                                                    <pre>&nbsp; &nbsp; &nbsp; &nbsp;</pre>@innerElement.Category_Name
+                                                </option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@innerElement.Id">
+                                                    <pre>&nbsp; &nbsp; &nbsp; &nbsp;</pre>@innerElement.Category_Name
+                                                </option>
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <option value="0">None</option>
+                        @foreach (var item in ViewBag.HeadCategories)
+                        {
+                            <option value="@item.Id">@item.Category_Name</option>
+                            @foreach (var element in ViewBag.Categories)
+                            {
+                                if (element.ParentId == item.Id)
+                                {
+                                    <option value="@element.Id">&nbsp; &nbsp;@element.Category_Name</option>
+                                    @foreach (var innerElement in ViewBag.Categories)
+                                    {
+                                        if (innerElement.ParentId == element.Id)
+                                        {
+                                            <option value="@innerElement.Id">
+                                                <pre>&nbsp; &nbsp; &nbsp; &nbsp;</pre>@innerElement.Category_Name
+                                            </option>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                </select>
+                @{
+                    foreach (var item in ViewBag.FieldsToShow)
+                    {
+                        <label class="lablelForSelect js" for="Fields">@item.Name field:</label>
+                        <select class="selectBox js" id="Fields" name="fieldsChoosed">
+                            @if (ViewBag.filterForFields.Count != 0)
+                            {
+                                List<ProductFieldValue> pfv = ViewBag.ProductFieldValues;
+                                for (int i = 0; i < ViewBag.currentFields.Length; i += 2)
+                                {
+                                    if (int.Parse(ViewBag.currentFields[i + 1]) == item.Id)
+                                    {
+                                        if (ViewBag.currentFields[i] == "0")
+                                        {
+                                            <option value="@ViewBag.currentFields[i]">None</option>
+                                            pfv.RemoveAll(m => m.Value == ViewBag.currentFields[i]);
+                                            List<ProductFieldValue> connector = new List<ProductFieldValue>();
+                                            foreach (var element in pfv)
+                                            {
+                                                if (element.FieldId == item.Id)
+                                                {
+                                                    connector.Add(element);
+                                                }
+                                            }
+
+                                            connector.RemoveAll(m => m.Value == "None Quantified");
+                                            List<string> pfvValuesWithoutDuplicate = connector.Select(c => c.Value).Distinct().ToList();
+                                            foreach (var element in pfvValuesWithoutDuplicate)
+                                            {
+                                                <option value="@element">@element</option>
+                                            }
+
+                                            <input class="js" type="hidden" name="fieldsChoosed" value="@item.Id">
+                                        }
+                                        else
+                                        {
+                                            <option value="@ViewBag.currentFields[i]">@ViewBag.currentFields[i]</option>
+                                            pfv.RemoveAll(m => m.Value == ViewBag.currentFields[i]);
+                                            List<ProductFieldValue> connector = new List<ProductFieldValue>();
+                                            foreach (var element in pfv)
+                                            {
+                                                if (element.FieldId == item.Id)
+                                                {
+                                                    connector.Add(element);
+                                                }
+                                            }
+
+                                            connector.RemoveAll(m => m.Value == "None Quantified");
+                                            List<string> pfvValuesWithoutDuplicate = connector.Select(c => c.Value).Distinct().ToList();
+                                            <option value="0">None</option>
+                                            foreach (var element in pfvValuesWithoutDuplicate)
+                                            {
+                                                <option value="@element">@element</option>
+                                            }
+
+                                            <input class="js" type="hidden" name="fieldsChoosed" value="@item.Id">
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <option value="0">None</option>
+                                List<ProductFieldValue> pfv = ViewBag.ProductFieldValues;
+                                List<ProductFieldValue> connector = new List<ProductFieldValue>();
+                                foreach (var element in pfv)
+                                {
+                                    if (element.FieldId == item.Id)
+                                    {
+                                        connector.Add(element);
+                                    }
+                                }
+
+                                connector.RemoveAll(m => m.Value == "None Quantified");
+                                List<string> pfvValuesWithoutDuplicate = connector.Select(c => c.Value).Distinct().ToList();
+                                foreach (var element in pfvValuesWithoutDuplicate)
+                                {
+                                    <option value="@element">@element</option>
+                                }
+
+                                <input class="js" type="hidden" name="fieldsChoosed" value="@item.Id">
+                            }
+                        </select>
+                    }
+                }
+                <input class="button" type="submit" value="Filter">
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // The URL to the controller's action method
+            var url = '@Url.Action("ajaxMethod", "Home")';
+            
+            $('#Categories').on('change', () => {
+                console.log("khar");
+
+                var optionSelected = $(this).find('option:selected');
+
+                var valueSelected = optionSelected.val();
+                var textSelected = optionSelected.text();
+
+                console.log('Selected value:', valueSelected);
+                console.log('Selected text:', textSelected);
+
+                $.ajax({
+                    type: "GET", // or "GET" depending on the method type
+                    url: `${url}?categoryId=${valueSelected}`,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        console.log('Success:', response);
+                        var fieldsToShow = response.fields;
+                        console.log('Fields to show:', fieldsToShow);
+
+                        const container = document.getElementsByClassName("js")
+                        const containerArray = Array.from(container);
+                        containerArray.forEach((element) => {
+                            element.remove();
+                        });
+                        
+                        
+                        var htmlString = '';
+                        for (var i = 0; i < fieldsToShow.length; i+=2) {
+                            var field = fieldsToShow[i];
+                            htmlString += `
+                                <label class="labelForSelect js" for="Fields" >${field.name} field:</label>
+                                <select class="selectBox js" id="Fields" name="fieldsChoosed">
+                                <option value="0">None</option>
+                            `;
+
+                            for (var j = 0; j < fieldsToShow[i+1].length; j++) {
+                                var sub = fieldsToShow[i+1][j];
+                                htmlString += `
+                                    <option value="${sub}">${sub}</option>
+                                `;
+                            }
+
+                            htmlString += `
+                                <input class="js" type="hidden" name="fieldsChoosed" value="${field.id}">
+                                </select>
+                            `;
+                        }
+                        document.getElementById('Categories').insertAdjacentHTML('afterEnd', htmlString);
+
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                        console.log('Success:', response);
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+}
